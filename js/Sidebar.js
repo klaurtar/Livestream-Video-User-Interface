@@ -6,6 +6,7 @@ class Sidebar {
     this.$body = undefined;
 
     this.content = [];
+    this.closeHandler = [];
 
     this.renderSidebar();
     this.cacheDOMElements();
@@ -51,9 +52,22 @@ class Sidebar {
     });
   }
 
+  onClose(func) {
+    this.closeHandler.push(func);
+  }
+
+  openSidebar() {
+    this.$sidebar.style.display = 'grid';
+  }
+
+  closeSidebar() {
+    this.$sidebar.style.display = 'none';
+  }
+
   setupListeners() {
     this.$sidebar.addEventListener('click', (event) => {
       const clickedButton = event.target;
+
       if (clickedButton.className === 'button') {
         this.$navButtons.forEach((button) => {
           button.dataset.active = false;
@@ -74,6 +88,11 @@ class Sidebar {
 
         test.active = true;
         this.renderBody();
+      } else if (clickedButton.closest('.close-container')) {
+        this.closeSidebar();
+        this.closeHandler.forEach((func) => {
+          func();
+        });
       }
     });
   }

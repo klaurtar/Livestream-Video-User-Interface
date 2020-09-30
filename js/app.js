@@ -1,9 +1,16 @@
+import { closeSidebar, openEverything } from './closeFunctionality/index.js';
+
 (function app() {
   const sidebar = new Sidebar();
   sidebar.setContent([
     {
-      name: 'AGENDA',
+      name: 'ENGAGE',
       active: true,
+      content: `<iframe src="https://app.meet.ps/attendee/templatetest" width="400" height="600" style="border:none;"></iframe>`,
+    },
+    {
+      name: 'AGENDA',
+      active: false,
       content: `<div class="agenda">
       <div class="date">
         Thursday, July 30, 2020
@@ -93,8 +100,59 @@
   </div>
 </div>`,
     },
+    {
+      name: 'NETWORK',
+      active: false,
+      content: `<div class="date" style="text-align: center">Breakout Room #1</div>
+      
+      <div class="time-slot" style="margin: 20px 0; text-align: center">
+          <i class="far fa-clock"></i> 12:30pm - 1:15pm
+        </div>
+        <div style="width: 100%; margin-bottom: 50px;">
+          <button class="breakout-button" style="text-align: center; display: block; margin: 0 auto">Attend Room</button>
+       </div>
+
+       <hr class="style-two">
+       <div class="date" style="text-align: center; margin-top: 50px">Breakout Room #2</div>
+      
+      <div class="time-slot" style="margin: 20px 0; text-align: center">
+          <i class="far fa-clock"></i> 1:30pm - 2:15pm
+        </div>
+        <div style="width: 100%; margin-bottom: 50px;">
+          <button class="breakout-button" style="text-align: center; display: block; margin: 0 auto">Attend Room</button>
+       </div>
+
+       <hr class="style-two">
+
+       
+       <div class="date" style="text-align: center; margin-top: 50px">Breakout Room #3</div>
+      
+      <div class="time-slot" style="margin: 20px 0; text-align: center">
+          <i class="far fa-clock"></i> 3:00pm - 4:00pm
+        </div>
+        <div style="width: 100%; margin-bottom: 50px;">
+          <button class="breakout-button" style="text-align: center; display: block; margin: 0 auto">Attend Room</button>
+       </div>
+
+       <hr class="style-two">
+      `,
+    },
   ]);
+
   const sidebarElement = sidebar.getSidebar();
 
   document.body.querySelector('.video-app').append(sidebarElement);
+  sidebar.onClose(closeSidebar);
+
+  function setUpListeners() {
+    document.body.addEventListener('click', (event) => {
+      const clickedButton = event.target;
+
+      if (clickedButton.closest('.open-container')) {
+        sidebar.openSidebar();
+        openEverything();
+      }
+    });
+  }
+  setUpListeners();
 })();
