@@ -13,7 +13,7 @@ export function closeSidebar() {
   $video.style.gridColumn = '1 / -1';
   $video.style.gridRow = '3 / -1';
   $multiBackground.style.padding = '2%';
-  $footer.style.gridColumn = '1 / -1';
+  $footer.style.display = 'none';
 
   $navbar.innerHTML = `<div class="open-container">
     <i class="fas fa-angle-double-left" style="color: white"></i>
@@ -27,6 +27,6 @@ export function openEverything() {
   $video.style.gridColumn = '1 / 13';
   $video.style.gridRow = '4 / 24';
   $multiBackground.style.padding = '5%';
-  $footer.style.gridColumn = '1 / 13';
+  $footer.style.display = 'grid';
 }
 // }
